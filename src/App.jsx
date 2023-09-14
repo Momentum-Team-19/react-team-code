@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "./components/Card";
 import "./App.css";
 
 function App() {
-    const colors = [
+      const colors = [
         "red",
         "orange",
         "yellow",
@@ -17,15 +17,31 @@ function App() {
         "blue",
         "purple",
     ];
-    const shuffledColors = colors.sort(() => Math.random() - 0.5);
-    console.log(shuffledColors)
-    const [count, setCount] = useState(0);
+
+    const [curCard, setCurCard] = useState('');
+    const [prevCard, setPrevCard] = useState('');
+    const [shuffledColors, setShuffledColors] = useState(colors)
+ 
+
+    
+
+    useEffect(() => {
+      const colorsCopy = [...colors]
+      setShuffledColors(colorsCopy.sort(() => Math.random() - 0.5));
+
+    },[]) 
+
 
     return (
         <>
             <div className='container'>
-                {colors.map((color, index) => (
-                    <Card key={index} color={color} />
+                {shuffledColors.map((color, index) => (
+                    <Card key={index} color={color} 
+                    curCard={curCard}
+                    prevCard={prevCard} 
+                    setCurCard={setCurCard} 
+                    setPrevCard={setPrevCard}
+                    />
                 ))}
             </div>
         </>
