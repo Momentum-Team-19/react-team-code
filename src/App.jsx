@@ -17,14 +17,14 @@ function App() {
     "blue",
     "purple",
   ];
-
+const shuffledColors = colors.sort(() => Math.random()-0.5);
   const [count, setCount] = useState(0);
 
   return (
     <>
-      {colors.map((color, index) => {
-        <Card />;
-      })}
+      {colors.map((color, index) => (
+        <Card key={index} color={color} />
+      ))}
     </>
   );
 }
